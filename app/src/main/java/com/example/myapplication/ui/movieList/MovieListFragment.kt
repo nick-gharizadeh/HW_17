@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.data.network.ApiService
+import com.example.myapplication.data.network.poster_path
 import com.example.myapplication.databinding.FragmentMovieListBinding
 
 
@@ -38,8 +41,12 @@ class MovieListFragment : Fragment() {
         viewModel.movieList.observe(viewLifecycleOwner) {
             binding.movieRecyclerView.adapter = adapter
             adapter.submitList(it)
+            Glide.with(this).load(poster_path + it[0].poster_path).into(binding.moviePhoto)
         }
-
     }
+
+//    https://image.tmdb.org/p/w500//neMZH82Stu91d3iqvLdNQfqPPyl.jpg
+//    https://image.tmdb.org/t/p/w500/neMZH82Stu91d3iqvLdNQfqPPyl.jpg
+
 
 }
