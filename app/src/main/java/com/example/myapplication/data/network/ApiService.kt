@@ -1,6 +1,5 @@
 package com.example.myapplication.data.network
 
-import com.example.myapplication.model.Movie
 import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.MovieListApiResult
 import com.example.myapplication.model.SearchMovie
@@ -39,6 +38,7 @@ interface ApiService {
         @Query("api_key") apiKey :String = api_key,
         @Query("query") query: String
     ):SearchMovie
+
     @GET("movie/{movie_id}")
     suspend fun MovieDetail(
         @Query("api_key") apiKey :String = api_key,
