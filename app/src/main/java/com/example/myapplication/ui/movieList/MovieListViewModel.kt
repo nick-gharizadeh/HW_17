@@ -17,9 +17,11 @@ enum class ApiStatus {
 class MovieListViewModel : ViewModel() {
     val status = MutableLiveData<ApiStatus>()
     val movieList = MutableLiveData<List<Movie>>()
+    val movieUpComingList = MutableLiveData<List<Movie>>()
 
     init {
         getMovie()
+        getUpComingMovies()
     }
 
     fun getMovie() {
@@ -29,4 +31,12 @@ class MovieListViewModel : ViewModel() {
             movieList.value = list
         }
     }
+
+    fun getUpComingMovies() {
+        viewModelScope.launch {
+            val list = Container.movieRepository.getUpComingMovies()
+            movieUpComingList.value = list
+        }
+    }
+
 }

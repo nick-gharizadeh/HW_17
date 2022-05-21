@@ -9,6 +9,9 @@ class MovieRemoteDataSource {
     suspend fun getMovie():List<Movie>{
         return MovieApi.retrofitService.getMovies().results
     }
+    suspend fun getUpComingMovies():List<Movie>{
+        return MovieApi.retrofitService.getUpComingMovies().results
+    }
     suspend fun searchMovie(query:String):List<Movie>{
         return MovieApi.retrofitService.searchMovie(query=query).results
     }
