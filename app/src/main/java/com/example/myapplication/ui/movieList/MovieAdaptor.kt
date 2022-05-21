@@ -3,11 +3,14 @@ package com.example.myapplication.ui.movieList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MovieListItemViewBinding
 import com.example.myapplication.model.Movie
@@ -16,7 +19,13 @@ import com.example.myapplication.model.Movie
 class MovieAdaptor() :
     ListAdapter<Movie, MovieAdaptor.ItemHolder>(MovieDiffCallback) {
     class ItemHolder(val binding: MovieListItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
-
+        private val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)
+        fun bind(movie: Movie) {
+            Glide.with(itemView)
+                .load("https://image.tmdb.org/t/p/w500/${movie.poster_path}")
+                .transform(CenterCrop())
+                .into(poster)
+        }
     }
 
 
@@ -33,6 +42,7 @@ class MovieAdaptor() :
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val movie = getItem(position)
         holder.binding.movie = movie
+        holder.bind(movie)
     }
 }
 

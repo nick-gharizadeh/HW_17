@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.network.ApiService
@@ -38,6 +39,8 @@ class MovieListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = MovieAdaptor()
+        val numberOfColumns= 3
+        binding.movieRecyclerView.setLayoutManager(GridLayoutManager(context, numberOfColumns))
         viewModel.movieList.observe(viewLifecycleOwner) {
             binding.movieRecyclerView.adapter = adapter
             adapter.submitList(it)
