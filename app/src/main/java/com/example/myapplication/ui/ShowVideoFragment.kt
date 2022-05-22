@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -36,12 +37,14 @@ class ShowVideoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getVideoOfMovie(movieId)
+        binding.webview.webViewClient= WebViewClient()
         viewModel.videoOfMovie.observe(viewLifecycleOwner)
         {
             val link = "https://www.youtube.com/watch?v=${it.results.get(0).key}"
-            Toast.makeText(context,link,Toast.LENGTH_LONG).show()
             binding.webview.settings.javaScriptEnabled = true
-            binding.webview.loadUrl(link)
+            binding.webview.apply {
+                loadUrl(link)
+            }
         }
 
 }
