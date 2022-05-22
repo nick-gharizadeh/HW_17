@@ -1,7 +1,9 @@
 package com.example.myapplication.data
 
+import com.example.myapplication.data.network.MovieApi
 import com.example.myapplication.model.Movie
 import com.example.myapplication.model.MovieDetail
+import com.example.myapplication.model.VideoMovie
 
 class MovieRepository (val movieRemoteDataSource:MovieRemoteDataSource){
     
@@ -18,6 +20,8 @@ class MovieRepository (val movieRemoteDataSource:MovieRemoteDataSource){
         return movieRemoteDataSource.MovieDetail(id)
     }
 
-
+    suspend fun videoOfMovie(id:Int): VideoMovie {
+        return movieRemoteDataSource.videoOfMovie(id)
+    }
 
 }

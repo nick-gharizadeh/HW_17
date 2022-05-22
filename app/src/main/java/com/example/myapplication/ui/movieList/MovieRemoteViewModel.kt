@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.domin.Container
 import com.example.myapplication.model.Movie
 import com.example.myapplication.model.MovieDetail
+import com.example.myapplication.model.VideoMovie
 import kotlinx.coroutines.launch
 
 
@@ -20,6 +21,7 @@ class MovieRemoteViewModel : ViewModel() {
     val movieList = MutableLiveData<List<Movie>>()
     val movieUpComingList = MutableLiveData<List<Movie>>()
     val movieDetail = MutableLiveData<MovieDetail>()
+    val videoOfMovie = MutableLiveData<VideoMovie>()
 
     init {
         getMovie()
@@ -45,5 +47,12 @@ class MovieRemoteViewModel : ViewModel() {
             movieDetail.value= Container.movieRepository.MovieDetail(id)
         }
     }
+
+    fun getVideoOfMovie(id:Int) {
+        viewModelScope.launch {
+            videoOfMovie.value= Container.movieRepository.videoOfMovie(id)
+        }
+    }
+
 
 }
