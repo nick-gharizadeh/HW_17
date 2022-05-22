@@ -17,5 +17,22 @@
         android:id="@+id/detailFragment"
         android:name="com.example.myapplication.ui.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_showPosterFragment"
+            app:destination="@id/showPosterFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_showVideoFragment"
+            app:destination="@id/showVideoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showVideoFragment"
+        android:name="com.example.myapplication.ui.ShowVideoFragment"
+        android:label="fragment_show_video"
+        tools:layout="@layout/fragment_show_video" />
+    <fragment
+        android:id="@+id/showPosterFragment"
+        android:name="com.example.myapplication.ui.ShowPosterFragment"
+        android:label="fragment_show_poster"
+        tools:layout="@layout/fragment_show_poster" />
 </navigation>

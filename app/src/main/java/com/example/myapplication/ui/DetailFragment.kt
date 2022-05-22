@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDetailBinding
 import com.example.myapplication.ui.movieList.MovieRemoteViewModel
 import com.example.myapplication.ui.movieList.movieId
@@ -54,10 +56,12 @@ class DetailFragment : Fragment() {
                     .into(binding.movieBackdrop)
             }
         binding.buttonVideo.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(""))
-            startActivity(browserIntent)
+          findNavController().navigate(R.id.action_detailFragment_to_showVideoFragment)
         }
+        binding.buttonPoster.setOnClickListener {
+            findNavController().navigate(R.id.action_detailFragment_to_showPosterFragment)
 
+        }
         }
 
     
