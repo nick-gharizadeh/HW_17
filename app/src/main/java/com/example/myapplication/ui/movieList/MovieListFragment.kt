@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
@@ -16,7 +15,7 @@ import com.example.myapplication.databinding.FragmentMovieListBinding
 
 class MovieListFragment : Fragment() {
     lateinit var binding: FragmentMovieListBinding
-    val viewModel : MovieListViewModel by activityViewModels()
+    val viewModel : MovieRemoteViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

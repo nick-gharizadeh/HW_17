@@ -105,10 +105,29 @@
         app:layout_constraintTop_toBottomOf="@+id/movie_poster_card" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonVideo"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text="ButtonVideo"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="640dp" />
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/design_default_color_error"
+        android:text="video"
+        app:icon="@drawable/ic_baseline_slow_motion_video_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPoster"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonPoster"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/design_default_color_error"
+        android:text="poster"
+        app:icon="@drawable/ic_baseline_image_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonVideo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@ enum class ApiStatus {
     Error
 }
 
-class MovieListViewModel : ViewModel() {
+class MovieRemoteViewModel : ViewModel() {
     val status = MutableLiveData<ApiStatus>()
     val movieList = MutableLiveData<List<Movie>>()
     val movieUpComingList = MutableLiveData<List<Movie>>()
