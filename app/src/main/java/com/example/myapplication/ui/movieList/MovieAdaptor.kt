@@ -15,8 +15,10 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.MovieListItemViewBinding
 import com.example.myapplication.model.Movie
 
+var movieId= 0
+typealias ClickHandler = ()-> Unit
 
-class MovieAdaptor() :
+class MovieAdaptor(private var clickHandler: ClickHandler) :
     ListAdapter<Movie, MovieAdaptor.ItemHolder>(MovieDiffCallback) {
     class ItemHolder(val binding: MovieListItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
         private val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)
@@ -43,6 +45,10 @@ class MovieAdaptor() :
         val movie = getItem(position)
         holder.binding.movie = movie
         holder.bind(movie)
+        holder.binding.constraintLayout.setOnClickListener {
+            movieId=getItem(position).id
+            clickHandler.invoke()
+        }
     }
 }
 

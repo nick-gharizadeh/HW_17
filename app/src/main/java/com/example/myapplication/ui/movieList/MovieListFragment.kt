@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentMovieListBinding
@@ -14,7 +16,7 @@ import com.example.myapplication.databinding.FragmentMovieListBinding
 
 class MovieListFragment : Fragment() {
     lateinit var binding: FragmentMovieListBinding
-    val viewModel : MovieListViewModel by viewModels()
+    val viewModel : MovieListViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +36,8 @@ class MovieListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = MovieAdaptor()
-        val adapterUpComing = MovieAdaptor()
+        val adapter = MovieAdaptor { goToDetailFragment() }
+        val adapterUpComing = MovieAdaptor{ goToDetailFragment() }
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         val layoutManager2 =
@@ -51,6 +53,12 @@ class MovieListFragment : Fragment() {
             binding.recyclerviewUpComing.adapter = adapterUpComing
             adapterUpComing.submitList(it)
         }
+    }
+
+
+    fun goToDetailFragment()
+    {
+        findNavController().navigate(R.id.action_movieListFragment_to_detailFragment)
     }
 
 

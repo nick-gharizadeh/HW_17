@@ -47,8 +47,8 @@ interface ApiService {
 
     @GET("movie/{movie_id}")
     suspend fun MovieDetail(
-        @Query("api_key") apiKey :String = api_key,
-        @Path(value = "movie_id") movieId: Int
+        @Path(value = "movie_id") movieId: Int,
+        @Query("api_key") apiKey :String = api_key
     ): MovieDetail
 
 
