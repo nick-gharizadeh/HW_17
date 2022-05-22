@@ -45,7 +45,7 @@ class DetailFragment : Fragment() {
             binding.movieTitle.text =it.title
             binding.movieReleaseDate.text =it.release_date
             binding.movieOverview.text =it.overview
-
+            binding.movieRating.rating = it.vote_average.toFloat()/2
                 Glide.with(requireContext())
                     .load("https://image.tmdb.org/t/p/w500/${it.poster_path}")
                     .transform(CenterCrop())
