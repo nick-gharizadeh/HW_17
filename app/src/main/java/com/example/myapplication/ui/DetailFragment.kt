@@ -39,7 +39,6 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-         viewModel.getMovieDetail(movieId)
         viewModel.movieDetail.observe(viewLifecycleOwner)
         {
             binding.movieTitle.text =it.title

@@ -1,9 +1,7 @@
 package com.example.myapplication.ui.movieList
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -19,7 +17,6 @@ class MovieListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -35,6 +32,10 @@ class MovieListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.searchMovieList.value= listOf()
+        binding.buttonSearch2.setOnClickListener {
+            findNavController().navigate(R.id.action_movieListFragment_to_searchFragment)
+        }
         val adapter = MovieAdaptor { goToDetailFragment() }
         val adapterUpComing = MovieAdaptor{ goToDetailFragment() }
         val layoutManager =
@@ -54,10 +55,10 @@ class MovieListFragment : Fragment() {
         }
     }
 
-
     fun goToDetailFragment()
     {
         findNavController().navigate(R.id.action_movieListFragment_to_detailFragment)
+        viewModel.getMovieDetail(movieId)
     }
 
 

@@ -19,6 +19,7 @@ enum class ApiStatus {
 class MovieRemoteViewModel : ViewModel() {
     val status = MutableLiveData<ApiStatus>()
     val movieList = MutableLiveData<List<Movie>>()
+    val searchMovieList = MutableLiveData<List<Movie>>()
     val movieUpComingList = MutableLiveData<List<Movie>>()
     val movieDetail = MutableLiveData<MovieDetail>()
     val videoOfMovie = MutableLiveData<VideoMovie>()
@@ -42,11 +43,18 @@ class MovieRemoteViewModel : ViewModel() {
             movieUpComingList.value = list
         }
     }
+    fun getSearchMovies(query:String) {
+        viewModelScope.launch {
+            val list = Container.movieRepository.searchMovie(query)
+            searchMovieList.value = list
+        }
+    }
     fun getMovieDetail(id:Int) {
         viewModelScope.launch {
             movieDetail.value= Container.movieRepository.MovieDetail(id)
         }
     }
+
 
     fun getVideoOfMovie(id:Int) {
         viewModelScope.launch {
