@@ -43,9 +43,9 @@ class MovieRemoteViewModel : ViewModel() {
             movieUpComingList.value = list
         }
     }
-    fun getSearchMovies(query:String) {
+    fun getSearchMovies(query:String,adult:Boolean) {
         viewModelScope.launch {
-            val list = Container.movieRepository.searchMovie(query)
+            val list = Container.movieRepository.searchMovie(query,adult)
             searchMovieList.value = list
         }
     }

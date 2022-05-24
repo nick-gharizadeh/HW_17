@@ -1,9 +1,7 @@
 package com.example.myapplication.model
 
-import androidx.room.Entity
 import com.squareup.moshi.Json
 
-@Entity
 data class Movie(
     @Json(name = "genre_ids")
     val genre_ids: List<Int>,

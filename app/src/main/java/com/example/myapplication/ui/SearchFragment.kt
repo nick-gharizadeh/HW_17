@@ -36,7 +36,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonSearch.setOnClickListener {
             if (binding.editTextSearch.editText?.text.toString().isNotBlank())
-            viewModel.getSearchMovies(binding.editTextSearch.editText?.text.toString())
+            viewModel.getSearchMovies(binding.editTextSearch.editText?.text.toString(),binding.checkBoxAdult.isChecked)
             else
                 binding.editTextSearch.editText?.setError("Please fill this field to continue")
         }

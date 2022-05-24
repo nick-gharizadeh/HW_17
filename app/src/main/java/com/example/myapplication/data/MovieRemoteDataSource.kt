@@ -13,8 +13,8 @@ class MovieRemoteDataSource {
     suspend fun getUpComingMovies():List<Movie>{
         return MovieApi.retrofitService.getUpComingMovies().results
     }
-    suspend fun searchMovie(query:String):List<Movie>{
-        return MovieApi.retrofitService.searchMovie(query=query).results
+    suspend fun searchMovie(query:String,adult:Boolean):List<Movie>{
+        return MovieApi.retrofitService.searchMovie(query=query, include_adult = adult).results
     }
     suspend fun MovieDetail(id:Int):MovieDetail{
         return MovieApi.retrofitService.MovieDetail(movieId = id)
