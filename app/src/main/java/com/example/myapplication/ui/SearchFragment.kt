@@ -46,7 +46,8 @@ class SearchFragment : Fragment() {
             if (binding.editTextSearch.editText?.text.toString().isNotBlank())
                 viewModel.getSearchMovies(
                     binding.editTextSearch.editText?.text.toString(),
-                    binding.checkBoxAdult.isChecked
+                    binding.checkBoxAdult.isChecked,
+                    binding.spinnerLanguage.selectedItem.toString()
                 )
             else
                 binding.editTextSearch.editText?.setError("Please fill this field to continue")

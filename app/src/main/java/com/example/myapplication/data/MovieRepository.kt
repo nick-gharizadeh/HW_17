@@ -12,8 +12,8 @@ class MovieRepository (val movieRemoteDataSource:MovieRemoteDataSource){
     suspend fun getUpComingMovies():List<Movie>{
         return movieRemoteDataSource.getUpComingMovies()
     }
-    suspend fun searchMovie(query:String,adult:Boolean):List<Movie>{
-        return movieRemoteDataSource.searchMovie(query,adult)
+    suspend fun searchMovie(query:String,adult:Boolean,language: String):List<Movie>{
+        return movieRemoteDataSource.searchMovie(query,adult, language)
     }
     suspend fun MovieDetail(id:Int): MovieDetail {
         return movieRemoteDataSource.MovieDetail(id)
