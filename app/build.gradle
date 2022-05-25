@@ -44,9 +44,8 @@ dependencies {
     def fragment_version = "1.4.1"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     def nav_version = "2.4.1"
-    // Kotlin
     def room_version = "2.4.2"
-    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -66,20 +65,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     // For control over item selection of both touch and mouse driven selection
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    // optional - RxJava2 support for Room
-    implementation "androidx.room:room-rxjava2:$room_version"
-    // optional - RxJava3 support for Room
-    implementation "androidx.room:room-rxjava3:$room_version"
-    // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation "androidx.room:room-guava:$room_version"
-    // optional - Test helpers
-    testImplementation "androidx.room:room-testing:$room_version"
-    // optional - Paging 3 Integration
-    implementation "androidx.room:room-paging:2.5.0-alpha01"
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
     testImplementation 'junit:junit:'
     implementation "io.coil-kt:coil:1.1.1"
     // Moshi
@@ -91,7 +76,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
 
     implementation 'androidx.core:core-ktx:1.7.0'
