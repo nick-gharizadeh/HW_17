@@ -2,9 +2,7 @@ package com.example.myapplication.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -38,6 +36,7 @@ class ShowVideoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getVideoOfMovie(movieId)
         binding.webview.webViewClient= WebViewClient()
+
         viewModel.videoOfMovie.observe(viewLifecycleOwner)
         {
             val link = "https://www.youtube.com/watch?v=${it.results.get(0).key}"
@@ -46,6 +45,13 @@ class ShowVideoFragment : Fragment() {
                 loadUrl(link)
             }
         }
-
+        binding.webview.canGoBack()
+        binding.webview.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.action === MotionEvent.ACTION_UP && binding.webview.canGoBack()) {
+                binding.webview.goBack()
+                return@OnKeyListener true
+            }
+            false
+        })
 }
 }
