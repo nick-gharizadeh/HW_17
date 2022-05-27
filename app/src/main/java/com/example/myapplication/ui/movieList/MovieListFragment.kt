@@ -2,6 +2,7 @@ package com.example.myapplication.ui.movieList
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -48,7 +49,12 @@ class MovieListFragment : Fragment() {
             binding.movieRecyclerView.adapter = adapter
             adapter.submitList(it)
         }
-
+        viewModel.connectionStatus.observe(viewLifecycleOwner) {
+            if (it)
+            {
+                Toast.makeText(context,"It seems you are not connected to the internet!",Toast.LENGTH_SHORT).show()
+            }
+        }
         viewModel.movieUpComingList.observe(viewLifecycleOwner) {
             binding.recyclerviewUpComing.adapter = adapterUpComing
             adapterUpComing.submitList(it)
