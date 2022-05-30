@@ -14,9 +14,9 @@ interface MovieDao {
     fun insert(movie: Movie?)
 
     @Query("SELECT * from movie ORDER BY id ASC")
-    fun getAllWords(): LiveData<List<Movie?>?>?
+    fun getAllMovie(): LiveData<List<Movie?>?>?
 
     @Query("SELECT COUNT(*) from movie")
-    fun getCount(): LiveData<Int>?
+    fun getCount(): Int
 
 }

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.movieList
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,10 +12,9 @@ import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 
 
-enum class ApiStatus {
-    Loading,
-    Done,
-    Error
+enum class ConnectionStatus {
+    NotConnected,
+    Connected
 }
 
 class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
@@ -24,6 +24,19 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     val movieUpComingList = MutableLiveData<List<Movie>>()
     val movieDetail = MutableLiveData<MovieDetail>()
     val videoOfMovie = MutableLiveData<VideoMovie>()
+    val allMovies: LiveData<List<Movie?>?>?
+    var countMovies: Int
+
+    init
+    {
+        allMovies =movieRepository.allMovies
+        countMovies =movieRepository.countMovies
+    }
+
+    fun insertMovie(movie: Movie)
+    {
+        movieRepository.insertMovie(movie)
+    }
 
     init {
         getMovie()
@@ -36,6 +49,10 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                 val list = movieRepository.getMovie()
                 movieList.value = list
                 connectionStatus.value = false
+                if(countMovies==0)
+                { for (movie in list)
+                    insertMovie(movie)
+                }
             } catch (e: SocketTimeoutException) {
                 connectionStatus.value = true
             }
