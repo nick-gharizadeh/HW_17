@@ -9,12 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.databinding.FragmentDetailBinding
 import com.example.myapplication.databinding.FragmentMovieListBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class MovieListFragment : Fragment() {
     lateinit var binding: FragmentMovieListBinding
-    val viewModel : MovieRemoteViewModel by activityViewModels()
+    val viewModel : MovieViewModel by sharedViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +27,7 @@ class MovieListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_movie_list,container,false)
-        binding.vModel = viewModel
-        binding.lifecycleOwner = this.viewLifecycleOwner
+        binding = FragmentMovieListBinding.inflate(layoutInflater)
         return binding.root
     }
 

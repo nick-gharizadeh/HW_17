@@ -4,20 +4,18 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentShowPosterBinding
 import com.example.myapplication.databinding.FragmentShowVideoBinding
-import com.example.myapplication.ui.movieList.MovieRemoteViewModel
+import com.example.myapplication.ui.movieList.MovieViewModel
 import com.example.myapplication.ui.movieList.movieId
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ShowVideoFragment : Fragment() {
 
     lateinit var binding: FragmentShowVideoBinding
-    val viewModel : MovieRemoteViewModel by activityViewModels()
+    val viewModel : MovieViewModel by sharedViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

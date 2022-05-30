@@ -40,6 +40,18 @@ android {
 }
 
 dependencies {
+    //koin
+    def koin_version = "3.2.0"
+// Koin main features for Android
+    implementation "io.insert-koin:koin-android:$koin_version"
+// No more koin-android-viewmodel, koin-android-scope, koin-android-fragment
+
+// Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+// Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+// Navigation Graph
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def fragment_version = "1.4.1"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"

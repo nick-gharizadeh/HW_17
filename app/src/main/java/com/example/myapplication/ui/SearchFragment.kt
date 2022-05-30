@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSearchBinding
 import com.example.myapplication.ui.movieList.MovieAdaptor
-import com.example.myapplication.ui.movieList.MovieRemoteViewModel
+import com.example.myapplication.ui.movieList.MovieViewModel
 import com.example.myapplication.ui.movieList.movieId
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class SearchFragment : Fragment() {
     lateinit var binding: FragmentSearchBinding
-    val viewModel: MovieRemoteViewModel by activityViewModels()
+    val viewModel: MovieViewModel by sharedViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

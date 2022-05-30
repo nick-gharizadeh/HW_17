@@ -1,26 +1,23 @@
 package com.example.myapplication.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDetailBinding
-import com.example.myapplication.ui.movieList.MovieRemoteViewModel
-import com.example.myapplication.ui.movieList.movieId
+import com.example.myapplication.ui.movieList.MovieViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class DetailFragment : Fragment() {
     lateinit var binding: FragmentDetailBinding
-    val viewModel : MovieRemoteViewModel by activityViewModels()
+    val viewModel : MovieViewModel by sharedViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

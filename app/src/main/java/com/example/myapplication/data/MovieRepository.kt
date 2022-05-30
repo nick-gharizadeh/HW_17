@@ -4,7 +4,7 @@ import com.example.myapplication.model.Movie
 import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.VideoMovie
 
-class MovieRepository (val movieRemoteDataSource:MovieRemoteDataSource){
+class MovieRepository (val movieRemoteDataSource:MovieRemoteDataSource,val movieLocalDataSource:MovieLocalDataSource){
     
     suspend fun getMovie():List<Movie>{
         return movieRemoteDataSource.getMovie()

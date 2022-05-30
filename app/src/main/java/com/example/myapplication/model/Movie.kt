@@ -1,14 +1,15 @@
 package com.example.myapplication.model
 
-import com.squareup.moshi.Json
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 data class Movie(
-    @Json(name = "genre_ids")
-    val genre_ids: List<Int>,
-    val id: Int,
-    val overview: String,
-    val poster_path: String?,
-    val title: String,
-    val video: Boolean,
+    @PrimaryKey  val id: Int,
+    @ColumnInfo val overview: String,
+    @ColumnInfo val poster_path: String?,
+    @ColumnInfo val title: String,
+    @ColumnInfo val video: Boolean,
 
-)
+    )

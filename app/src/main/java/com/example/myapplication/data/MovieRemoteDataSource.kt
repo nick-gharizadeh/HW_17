@@ -1,25 +1,25 @@
 package com.example.myapplication.data
 
-import com.example.myapplication.data.network.MovieApi
+import com.example.myapplication.data.network.ApiService
 import com.example.myapplication.model.Movie
 import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.VideoMovie
 
-class MovieRemoteDataSource {
+class MovieRemoteDataSource(val movieApiService : ApiService) {
 
     suspend fun getMovie():List<Movie>{
-        return MovieApi.retrofitService.getMovies().results
+        return movieApiService.getMovies().results
     }
     suspend fun getUpComingMovies():List<Movie>{
-        return MovieApi.retrofitService.getUpComingMovies().results
+        return movieApiService.getUpComingMovies().results
     }
     suspend fun searchMovie(query:String,adult:Boolean,language: String):List<Movie>{
-        return MovieApi.retrofitService.searchMovie(query=query, include_adult = adult, language = language).results
+        return movieApiService.searchMovie(query=query, include_adult = adult, language = language).results
     }
     suspend fun MovieDetail(id:Int):MovieDetail{
-        return MovieApi.retrofitService.MovieDetail(movieId = id)
+        return movieApiService.MovieDetail(movieId = id)
     }
     suspend fun videoOfMovie(id:Int):VideoMovie{
-        return MovieApi.retrofitService.videoOfMovie(movieId = id)
+        return movieApiService.videoOfMovie(movieId = id)
     }
 }

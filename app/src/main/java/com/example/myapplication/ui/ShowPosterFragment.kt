@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.example.myapplication.R
-import com.example.myapplication.databinding.FragmentDetailBinding
 import com.example.myapplication.databinding.FragmentShowPosterBinding
-import com.example.myapplication.ui.movieList.MovieRemoteViewModel
+import com.example.myapplication.ui.movieList.MovieViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ShowPosterFragment : Fragment() {
     lateinit var binding: FragmentShowPosterBinding
-    val viewModel : MovieRemoteViewModel by activityViewModels()
+    val viewModel : MovieViewModel by sharedViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
