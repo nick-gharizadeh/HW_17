@@ -48,6 +48,11 @@ class MovieListFragment : Fragment() {
             binding.movieRecyclerView.adapter = adapter
             adapter.submitList(it)
         }
+
+        viewModel.allMovies?.observe(viewLifecycleOwner) {
+            if(viewModel.connectionStatus.value==true)
+            viewModel.getMovie()
+        }
         viewModel.connectionStatus.observe(viewLifecycleOwner) {
             if (it)
             {

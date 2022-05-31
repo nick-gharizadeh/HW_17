@@ -19,7 +19,7 @@ enum class ConnectionStatus {
 
 class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     var connectionStatus = MutableLiveData(false)
-    val movieList = MutableLiveData<List<Movie>>()
+    val movieList = MutableLiveData<List<Movie?>>()
     val searchMovieList = MutableLiveData<List<Movie>>()
     val movieUpComingList = MutableLiveData<List<Movie>>()
     val movieDetail = MutableLiveData<MovieDetail>()
@@ -27,16 +27,13 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     val allMovies: LiveData<List<Movie?>?>?
     var countMovies: Int
 
-    init {
-        allMovies = movieRepository.getLocalMovies()
-        countMovies = movieRepository.countMovies
-    }
-
     fun insertMovie(movie: Movie) {
         movieRepository.insertMovie(movie)
     }
 
     init {
+        allMovies = movieRepository.getLocalMovies()
+        countMovies = movieRepository.countMovies
         getMovie()
         getUpComingMovies()
     }
@@ -47,16 +44,16 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                 val list = movieRepository.getMovie()
                 movieList.value = list
                 connectionStatus.value = false
-//                if (countMovies == 0) {
-//                    for (movie in list) {
-//                        movie.isUpComing = false
-//                        insertMovie(movie)
-//                    }
-//                }
-                insertMovie(Movie(2332,"f","","testttt",false,false))
+                if (countMovies == 0) {
+                    for (movie in list) {
+                        movie.isUpComing = false
+                        insertMovie(movie)
+                    }
+                }
+
             } catch (e: SocketTimeoutException) {
-                movieList.value = listOf(Movie(2332,"f","","testttt",false,false))
                 connectionStatus.value = true
+                movieList.value = allMovies?.value
             }
         }
     }

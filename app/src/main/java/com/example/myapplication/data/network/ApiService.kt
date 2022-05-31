@@ -20,13 +20,13 @@ interface ApiService {
 
     @GET("movie/popular")
     suspend fun getMovies(
-        @Query("page")page :Int = 1,
+        @Query("page")page :Int = 5,
         @Query("api_key") apiKey :String = api_key
     ): MovieListApiResult
 
     @GET("movie/upcoming")
     suspend fun getUpComingMovies(
-        @Query("page")page :Int = 1,
+        @Query("page")page :Int =3,
         @Query("api_key") apiKey :String = api_key
     ): MovieListApiResult
 
