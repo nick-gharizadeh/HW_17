@@ -14,6 +14,9 @@ class MovieRepository (val movieRemoteDataSource:MovieRemoteDataSource,val movie
         allMovies =movieLocalDataSource.allMovies
         countMovies =movieLocalDataSource.countMovies
     }
+    fun getLocalMovies(): LiveData<List<Movie?>?>? {
+        return allMovies
+    }
 
     fun insertMovie(movie: Movie)
     {

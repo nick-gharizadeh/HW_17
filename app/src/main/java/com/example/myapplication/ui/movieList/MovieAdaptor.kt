@@ -28,6 +28,7 @@ class MovieAdaptor(private var clickHandler: ClickHandler) :
                 .load("https://image.tmdb.org/t/p/w500/${movie.poster_path}")
                 .transform(CenterCrop())
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .placeholder(R.drawable.img)
                 .into(poster)
         }
     }
