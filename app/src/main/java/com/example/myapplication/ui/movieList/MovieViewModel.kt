@@ -27,14 +27,12 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     val allMovies: LiveData<List<Movie?>?>?
     var countMovies: Int
 
-    init
-    {
-        allMovies =movieRepository.allMovies
-        countMovies =movieRepository.countMovies
+    init {
+        allMovies = movieRepository.allMovies
+        countMovies = movieRepository.countMovies
     }
 
-    fun insertMovie(movie: Movie)
-    {
+    fun insertMovie(movie: Movie) {
         movieRepository.insertMovie(movie)
     }
 
@@ -49,9 +47,11 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                 val list = movieRepository.getMovie()
                 movieList.value = list
                 connectionStatus.value = false
-                if(countMovies==0)
-                { for (movie in list)
-                    insertMovie(movie)
+                if (countMovies == 0) {
+                    for (movie in list) {
+                        movie.isUpComing = false
+                        insertMovie(movie)
+                    }
                 }
             } catch (e: SocketTimeoutException) {
                 connectionStatus.value = true
@@ -65,6 +65,13 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                 val list = movieRepository.getUpComingMovies()
                 movieUpComingList.value = list
                 connectionStatus.value = false
+                if (countMovies == 0) {
+                    for (movie in list) {
+                        movie.isUpComing = true
+                        insertMovie(movie)
+                    }
+
+                }
 
             } catch (e: SocketTimeoutException) {
                 connectionStatus.value = true

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MovieListItemViewBinding
@@ -26,6 +27,7 @@ class MovieAdaptor(private var clickHandler: ClickHandler) :
             Glide.with(itemView)
                 .load("https://image.tmdb.org/t/p/w500/${movie.poster_path}")
                 .transform(CenterCrop())
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(poster)
         }
     }
