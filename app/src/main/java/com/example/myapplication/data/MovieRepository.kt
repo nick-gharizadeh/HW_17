@@ -7,15 +7,20 @@ import com.example.myapplication.model.VideoMovie
 
 class MovieRepository (val movieRemoteDataSource:MovieRemoteDataSource,val movieLocalDataSource:MovieLocalDataSource){
     val allMovies: LiveData<List<Movie?>?>?
+    val allUpComingMovies: LiveData<List<Movie?>?>?
     var countMovies: Int
 
     init
     {
         allMovies =movieLocalDataSource.allMovies
+        allUpComingMovies =movieLocalDataSource.allUpComingMovies
         countMovies =movieLocalDataSource.countMovies
     }
     fun getLocalMovies(): LiveData<List<Movie?>?>? {
         return allMovies
+    }
+    fun getLocalUpComingMovies(): LiveData<List<Movie?>?>? {
+        return allUpComingMovies
     }
 
     fun insertMovie(movie: Movie)

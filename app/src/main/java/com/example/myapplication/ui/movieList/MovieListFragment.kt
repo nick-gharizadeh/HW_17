@@ -50,8 +50,14 @@ class MovieListFragment : Fragment() {
         }
 
         viewModel.allMovies?.observe(viewLifecycleOwner) {
-            if(viewModel.connectionStatus.value==true)
-            viewModel.getMovie()
+            if(viewModel.connectionStatus.value==true) {
+                viewModel.getMovie()
+            }
+        }
+        viewModel.allUpComingMovies?.observe(viewLifecycleOwner) {
+            if(viewModel.connectionStatus.value==true) {
+                viewModel.getUpComingMovies()
+            }
         }
         viewModel.connectionStatus.observe(viewLifecycleOwner) {
             if (it)

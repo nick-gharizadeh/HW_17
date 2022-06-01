@@ -21,10 +21,11 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     var connectionStatus = MutableLiveData(false)
     val movieList = MutableLiveData<List<Movie?>>()
     val searchMovieList = MutableLiveData<List<Movie>>()
-    val movieUpComingList = MutableLiveData<List<Movie>>()
+    val movieUpComingList = MutableLiveData<List<Movie?>>()
     val movieDetail = MutableLiveData<MovieDetail>()
     val videoOfMovie = MutableLiveData<VideoMovie>()
     val allMovies: LiveData<List<Movie?>?>?
+    val allUpComingMovies: LiveData<List<Movie?>?>?
     var countMovies: Int
 
     fun insertMovie(movie: Movie) {
@@ -33,6 +34,7 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
 
     init {
         allMovies = movieRepository.getLocalMovies()
+        allUpComingMovies = movieRepository.getLocalUpComingMovies()
         countMovies = movieRepository.countMovies
         getMovie()
         getUpComingMovies()
@@ -46,8 +48,10 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                 connectionStatus.value = false
                 if (countMovies == 0) {
                     for (movie in list) {
-                        movie.isUpComing = false
-                        insertMovie(movie)
+                        viewModelScope.launch {
+                            movie.isUpComing = false
+                            insertMovie(movie)
+                        }
                     }
                 }
 
@@ -64,16 +68,15 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                 val list = movieRepository.getUpComingMovies()
                 movieUpComingList.value = list
                 connectionStatus.value = false
-//                if (countMovies == 0) {
-//                    for (movie in list) {
-//                        movie.isUpComing = true
-//                        insertMovie(movie)
-//                    }
-//
-//                }
-
+                    for (movie in list) {
+                        viewModelScope.launch {
+                            movie.isUpComing = true
+                            insertMovie(movie)
+                        }
+                    }
             } catch (e: SocketTimeoutException) {
                 connectionStatus.value = true
+                movieUpComingList.value = allUpComingMovies?.value
             }
         }
     }
