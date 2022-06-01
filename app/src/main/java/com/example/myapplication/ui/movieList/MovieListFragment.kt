@@ -50,17 +50,17 @@ class MovieListFragment : Fragment() {
         }
 
         viewModel.allMovies?.observe(viewLifecycleOwner) {
-            if(viewModel.connectionStatus.value==true) {
+            if(viewModel.connectionStatus.value==ConnectionStatus.NotConnected) {
                 viewModel.getMovie()
             }
         }
         viewModel.allUpComingMovies?.observe(viewLifecycleOwner) {
-            if(viewModel.connectionStatus.value==true) {
+            if(viewModel.connectionStatus.value==ConnectionStatus.NotConnected) {
                 viewModel.getUpComingMovies()
             }
         }
         viewModel.connectionStatus.observe(viewLifecycleOwner) {
-            if (it)
+            if (it==ConnectionStatus.NotConnected)
             {
                 Toast.makeText(context,"It seems you are not connected to the internet!",Toast.LENGTH_SHORT).show()
             }

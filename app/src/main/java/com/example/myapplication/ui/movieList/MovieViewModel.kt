@@ -18,7 +18,7 @@ enum class ConnectionStatus {
 }
 
 class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
-    var connectionStatus = MutableLiveData(false)
+    var connectionStatus = MutableLiveData(ConnectionStatus.NotConnected)
     val movieList = MutableLiveData<List<Movie?>>()
     val searchMovieList = MutableLiveData<List<Movie>>()
     val movieUpComingList = MutableLiveData<List<Movie?>>()
@@ -45,7 +45,7 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
             try {
                 val list = movieRepository.getMovie()
                 movieList.value = list
-                connectionStatus.value = false
+                connectionStatus.value = ConnectionStatus.Connected
                 if (countMovies == 0) {
                     for (movie in list) {
                         viewModelScope.launch {
@@ -56,7 +56,7 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                 }
 
             } catch (e: SocketTimeoutException) {
-                connectionStatus.value = true
+                connectionStatus.value = ConnectionStatus.NotConnected
                 movieList.value = allMovies?.value
             }
         }
@@ -67,7 +67,7 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
             try {
                 val list = movieRepository.getUpComingMovies()
                 movieUpComingList.value = list
-                connectionStatus.value = false
+                connectionStatus.value = ConnectionStatus.Connected
                 if (countMovies <= 20) {
                     for (movie in list) {
                         viewModelScope.launch {
@@ -77,7 +77,7 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                     }
                 }
             } catch (e: SocketTimeoutException) {
-                connectionStatus.value = true
+                connectionStatus.value = ConnectionStatus.NotConnected
                 movieUpComingList.value = allUpComingMovies?.value
             }
         }
@@ -88,10 +88,10 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
             try {
                 val list = movieRepository.searchMovie(query, adult, language)
                 searchMovieList.value = list
-                connectionStatus.value = false
+                connectionStatus.value = ConnectionStatus.Connected
 
             } catch (e: SocketTimeoutException) {
-                connectionStatus.value = true
+                connectionStatus.value = ConnectionStatus.NotConnected
             }
         }
     }
@@ -100,9 +100,9 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 movieDetail.value = movieRepository.MovieDetail(id)
-                connectionStatus.value = false
+                connectionStatus.value = ConnectionStatus.Connected
             } catch (e: SocketTimeoutException) {
-                connectionStatus.value = true
+                connectionStatus.value = ConnectionStatus.NotConnected
 
             }
         }
@@ -113,10 +113,10 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 videoOfMovie.value = movieRepository.videoOfMovie(id)
-                connectionStatus.value = false
+                connectionStatus.value = ConnectionStatus.Connected
 
             } catch (e: SocketTimeoutException) {
-                connectionStatus.value = true
+                connectionStatus.value = ConnectionStatus.NotConnected
             }
         }
     }

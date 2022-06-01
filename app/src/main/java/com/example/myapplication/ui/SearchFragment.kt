@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSearchBinding
+import com.example.myapplication.ui.movieList.ConnectionStatus
 import com.example.myapplication.ui.movieList.MovieAdaptor
 import com.example.myapplication.ui.movieList.MovieViewModel
 import com.example.myapplication.ui.movieList.movieId
@@ -44,7 +45,7 @@ class SearchFragment : Fragment() {
         spinnerAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_item)
         binding.spinnerLanguage.adapter=spinnerAdaptor
         viewModel.connectionStatus.observe(viewLifecycleOwner) {
-            if (it)
+            if (it== ConnectionStatus.NotConnected)
             {
                 Toast.makeText(context,"It seems you are not connected to the internet!", Toast.LENGTH_SHORT).show()
             }
