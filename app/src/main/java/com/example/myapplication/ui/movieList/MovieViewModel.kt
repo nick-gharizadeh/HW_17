@@ -28,7 +28,7 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     val allUpComingMovies: LiveData<List<Movie?>?>?
     var countMovies: Int
 
-    fun insertMovie(movie: Movie) {
+    suspend fun insertMovie(movie: Movie) {
         movieRepository.insertMovie(movie)
     }
 
@@ -68,12 +68,14 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
                 val list = movieRepository.getUpComingMovies()
                 movieUpComingList.value = list
                 connectionStatus.value = false
+                if (countMovies <= 20) {
                     for (movie in list) {
                         viewModelScope.launch {
                             movie.isUpComing = true
                             insertMovie(movie)
                         }
                     }
+                }
             } catch (e: SocketTimeoutException) {
                 connectionStatus.value = true
                 movieUpComingList.value = allUpComingMovies?.value

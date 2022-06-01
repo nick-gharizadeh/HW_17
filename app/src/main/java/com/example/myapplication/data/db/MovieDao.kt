@@ -12,7 +12,7 @@ import com.example.myapplication.model.Movie
 interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(movie: Movie?)
+   suspend fun insert(movie: Movie?)
 
     @Query("SELECT * from movie where isUpComing=0 ORDER By id ASC ")
     fun getAllMovie(): LiveData<List<Movie?>?>?

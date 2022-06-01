@@ -16,7 +16,7 @@ class MovieLocalDataSource(val movieDao:MovieDao?) {
         allUpComingMovies =movieDao?.getAllUpComingMovies()
         countMovies = movieDao?.getCount() ?: 0
     }
-    fun insertMovie(movie: Movie)
+    suspend fun insertMovie(movie: Movie)
     {
         movieDao?.insert(movie)
     }
