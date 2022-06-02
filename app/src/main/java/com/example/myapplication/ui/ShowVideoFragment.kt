@@ -9,13 +9,14 @@ import androidx.fragment.app.activityViewModels
 import com.example.myapplication.databinding.FragmentShowVideoBinding
 import com.example.myapplication.ui.movieList.MovieViewModel
 import com.example.myapplication.ui.movieList.movieId
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-
+@AndroidEntryPoint
 class ShowVideoFragment : Fragment() {
 
     lateinit var binding: FragmentShowVideoBinding
-    val viewModel : MovieViewModel by sharedViewModel()
+    val viewModel: MovieViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

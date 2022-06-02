@@ -8,16 +8,18 @@ import com.example.myapplication.data.MovieRepository
 import com.example.myapplication.model.Movie
 import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.VideoMovie
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
+import javax.inject.Inject
 
 
 enum class ConnectionStatus {
     NotConnected,
     Connected
 }
-
-class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
+@HiltViewModel
+class MovieViewModel @Inject constructor(val movieRepository: MovieRepository) : ViewModel() {
     var connectionStatus = MutableLiveData(ConnectionStatus.Connected)
     val movieList = MutableLiveData<List<Movie?>>()
     val searchMovieList = MutableLiveData<List<Movie>>()

@@ -1,23 +1,24 @@
 package com.example.myapplication.data
 
 import androidx.lifecycle.LiveData
-import com.example.myapplication.data.db.MovieDao
+import com.example.myapplication.data.db.AppDataBase
 import com.example.myapplication.model.Movie
+import javax.inject.Inject
 
 
-class MovieLocalDataSource(val movieDao:MovieDao?) {
+class MovieLocalDataSource @Inject constructor(val db:AppDataBase) {
     val allMovies: LiveData<List<Movie?>?>?
     val allUpComingMovies: LiveData<List<Movie?>?>?
     var countMovies: Int
 
     init
     {
-        allMovies =movieDao?.getAllMovie()
-        allUpComingMovies =movieDao?.getAllUpComingMovies()
-        countMovies = movieDao?.getCount() ?: 0
+        allMovies =db.movieDao()?.getAllMovie()
+        allUpComingMovies =db.movieDao()?.getAllUpComingMovies()
+        countMovies = db.movieDao()?.getCount() ?: 0
     }
     suspend fun insertMovie(movie: Movie)
     {
-        movieDao?.insert(movie)
+        db.movieDao()?.insert(movie)
     }
 }

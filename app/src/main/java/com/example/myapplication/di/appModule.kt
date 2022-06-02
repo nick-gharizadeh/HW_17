@@ -15,38 +15,38 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-
-val appModule = module {
-
-    single { MovieRepository(get(), get()) }
-
-    single { MovieRemoteDataSource(get()) }
-
-    single { MovieLocalDataSource(get()) }
-
-    single {
-        val retrofit = get() as Retrofit
-        val movieApiService = retrofit.create(ApiService::class.java)
-        movieApiService
-    }
-    single {
-        val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl("https://api.themoviedb.org/3/")
-            .build()
-        retrofit
-    }
-
-    viewModel { MovieViewModel(get()) }
-
-    single {
-        AppDataBase.getDatabase(androidContext())
-    }
-    single {
-        get<AppDataBase>().movieDao()
-    }
-}
+//
+//val appModule = module {
+//
+//    single { MovieRepository(get(), get()) }
+//
+//    single { MovieRemoteDataSource(get()) }
+//
+//    single { MovieLocalDataSource(get()) }
+//
+//    single {
+//        val retrofit = get() as Retrofit
+//        val movieApiService = retrofit.create(ApiService::class.java)
+//        movieApiService
+//    }
+//    single {
+//        val moshi = Moshi.Builder()
+//            .add(KotlinJsonAdapterFactory())
+//            .build()
+//
+//        val retrofit = Retrofit.Builder()
+//            .addConverterFactory(MoshiConverterFactory.create(moshi))
+//            .baseUrl("https://api.themoviedb.org/3/")
+//            .build()
+//        retrofit
+//    }
+//
+//    viewModel { MovieViewModel(get()) }
+//
+//    single {
+//        AppDataBase.getDatabase(androidContext())
+//    }
+//    single {
+//        get<AppDataBase>().movieDao()
+//    }
+//}

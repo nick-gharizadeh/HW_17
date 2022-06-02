@@ -4,8 +4,9 @@ import com.example.myapplication.data.network.ApiService
 import com.example.myapplication.model.Movie
 import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.VideoMovie
+import javax.inject.Inject
 
-class MovieRemoteDataSource(val movieApiService : ApiService) {
+class MovieRemoteDataSource @Inject constructor(val movieApiService : ApiService) {
 
     suspend fun getMovie():List<Movie>{
         return movieApiService.getMovies().results

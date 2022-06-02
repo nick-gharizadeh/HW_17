@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDetailBinding
 import com.example.myapplication.databinding.FragmentMovieListBinding
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-
+@AndroidEntryPoint
 class MovieListFragment : Fragment() {
     lateinit var binding: FragmentMovieListBinding
-    val viewModel : MovieViewModel by sharedViewModel()
+    val viewModel : MovieViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

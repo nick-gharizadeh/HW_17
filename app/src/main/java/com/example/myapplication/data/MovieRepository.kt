@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import com.example.myapplication.model.Movie
 import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.VideoMovie
+import javax.inject.Inject
 
-class MovieRepository(
+class MovieRepository @Inject constructor(
     val movieRemoteDataSource: MovieRemoteDataSource,
     val movieLocalDataSource: MovieLocalDataSource
 ) {

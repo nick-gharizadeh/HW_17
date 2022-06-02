@@ -12,12 +12,13 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDetailBinding
 import com.example.myapplication.ui.movieList.MovieViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
     lateinit var binding: FragmentDetailBinding
-    val viewModel : MovieViewModel by sharedViewModel()
+    val viewModel : MovieViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
