@@ -18,7 +18,7 @@ enum class ConnectionStatus {
 }
 
 class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
-    var connectionStatus = MutableLiveData(ConnectionStatus.NotConnected)
+    var connectionStatus = MutableLiveData(ConnectionStatus.Connected)
     val movieList = MutableLiveData<List<Movie?>>()
     val searchMovieList = MutableLiveData<List<Movie>>()
     val movieUpComingList = MutableLiveData<List<Movie?>>()
