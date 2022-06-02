@@ -17,7 +17,7 @@ class MovieRemoteDataSource @Inject constructor(val movieApiService : ApiService
     suspend fun searchMovie(query:String,adult:Boolean,language: String):List<Movie>{
         return movieApiService.searchMovie(query=query, include_adult = adult, language = language).results
     }
-    suspend fun MovieDetail(id:Int):MovieDetail{
+    suspend fun MovieDetail(id:Int):Movie{
         return movieApiService.MovieDetail(movieId = id)
     }
     suspend fun videoOfMovie(id:Int):VideoMovie{

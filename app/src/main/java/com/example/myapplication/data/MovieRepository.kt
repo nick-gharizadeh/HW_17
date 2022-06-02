@@ -44,7 +44,7 @@ class MovieRepository @Inject constructor(
         return movieRemoteDataSource.searchMovie(query, adult, language)
     }
 
-    suspend fun MovieDetail(id: Int): MovieDetail {
+    suspend fun MovieDetail(id: Int): Movie {
         return movieRemoteDataSource.MovieDetail(id)
     }
 

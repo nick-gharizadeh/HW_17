@@ -24,7 +24,7 @@ class MovieViewModel @Inject constructor(val movieRepository: MovieRepository) :
     val movieList = MutableLiveData<List<Movie?>>()
     val searchMovieList = MutableLiveData<List<Movie>>()
     val movieUpComingList = MutableLiveData<List<Movie?>>()
-    val movieDetail = MutableLiveData<MovieDetail>()
+    val movieDetail = MutableLiveData<Movie>()
     val videoOfMovie = MutableLiveData<VideoMovie>()
     val allMovies: LiveData<List<Movie?>?>?
     val allUpComingMovies: LiveData<List<Movie?>?>?

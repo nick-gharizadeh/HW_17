@@ -23,22 +23,36 @@ object Module {
     @Singleton
     @Provides
     fun provideDataBase(@ApplicationContext context: Context): AppDataBase {
-        return Room.databaseBuilder(context,
-            AppDataBase::class.java, DATABASE_NAME)
+        return Room.databaseBuilder(
+            context,
+            AppDataBase::class.java, DATABASE_NAME
+        )
             .allowMainThreadQueries()
             .build()
     }
 
     @Singleton
     @Provides
-    fun getApiService(): ApiService {
+    fun getMoshi(): Moshi {
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
+        return moshi
+    }
+
+    @Singleton
+    @Provides
+    fun getRetrofit(moshi: Moshi): Retrofit {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl("https://api.themoviedb.org/3/")
             .build()
+        return retrofit
+    }
+
+    @Singleton
+    @Provides
+    fun getApiService(retrofit: Retrofit): ApiService {
         val movieApiService = retrofit.create(ApiService::class.java)
         return movieApiService
     }
