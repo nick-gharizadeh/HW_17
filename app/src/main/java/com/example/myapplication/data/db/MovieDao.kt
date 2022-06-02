@@ -17,6 +17,9 @@ interface MovieDao {
     @Query("SELECT * from movie where isUpComing=0 ORDER By id ASC ")
     fun getAllMovie(): LiveData<List<Movie?>?>?
 
+    @Query("SELECT * from movie where id=(:id) LIMIT 1 ")
+    suspend fun getMovieByID(id:Int): Movie
+
     @Query("SELECT * from movie where isUpComing=1 ORDER By id ASC ")
     fun getAllUpComingMovies(): LiveData<List<Movie?>?>?
 

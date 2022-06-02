@@ -2,7 +2,6 @@ package com.example.myapplication.data
 
 import com.example.myapplication.data.network.ApiService
 import com.example.myapplication.model.Movie
-import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.VideoMovie
 
 class MovieRemoteDataSource(val movieApiService : ApiService) {
@@ -16,7 +15,7 @@ class MovieRemoteDataSource(val movieApiService : ApiService) {
     suspend fun searchMovie(query:String,adult:Boolean,language: String):List<Movie>{
         return movieApiService.searchMovie(query=query, include_adult = adult, language = language).results
     }
-    suspend fun MovieDetail(id:Int):MovieDetail{
+    suspend fun MovieDetail(id:Int):Movie{
         return movieApiService.MovieDetail(movieId = id)
     }
     suspend fun videoOfMovie(id:Int):VideoMovie{

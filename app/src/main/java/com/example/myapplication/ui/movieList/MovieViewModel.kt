@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.MovieRepository
 import com.example.myapplication.model.Movie
-import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.VideoMovie
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 
@@ -22,7 +22,7 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     val movieList = MutableLiveData<List<Movie?>>()
     val searchMovieList = MutableLiveData<List<Movie>>()
     val movieUpComingList = MutableLiveData<List<Movie?>>()
-    val movieDetail = MutableLiveData<MovieDetail>()
+    val movieDetail = MutableLiveData<Movie>()
     val videoOfMovie = MutableLiveData<VideoMovie>()
     val allMovies: LiveData<List<Movie?>?>?
     val allUpComingMovies: LiveData<List<Movie?>?>?
@@ -98,13 +98,7 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
 
     fun getMovieDetail(id: Int) {
         viewModelScope.launch {
-            try {
-                movieDetail.value = movieRepository.MovieDetail(id)
-                connectionStatus.value = ConnectionStatus.Connected
-            } catch (e: SocketTimeoutException) {
-                connectionStatus.value = ConnectionStatus.NotConnected
-
-            }
+            movieDetail.value = movieRepository.MovieDetail(id)
         }
     }
 

@@ -20,4 +20,9 @@ class MovieLocalDataSource(val movieDao:MovieDao?) {
     {
         movieDao?.insert(movie)
     }
+
+    suspend fun getMovieByID(id:Int): Movie
+    {
+       return movieDao?.getMovieByID(id)!!
+    }
 }

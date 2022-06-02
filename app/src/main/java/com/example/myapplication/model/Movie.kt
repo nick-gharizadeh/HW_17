@@ -13,4 +13,8 @@ data class Movie(
     @ColumnInfo val title: String,
     @ColumnInfo val video: Boolean,
     @ColumnInfo var isUpComing: Boolean?,
-    )
+    @ColumnInfo val backdrop_path: String?,
+    @ColumnInfo val vote_average: Double,
+    @ColumnInfo val release_date: String
+)
+

@@ -2,8 +2,11 @@ package com.example.myapplication.data
 
 import androidx.lifecycle.LiveData
 import com.example.myapplication.model.Movie
-import com.example.myapplication.model.MovieDetail
 import com.example.myapplication.model.VideoMovie
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 
 class MovieRepository(
     val movieRemoteDataSource: MovieRemoteDataSource,
@@ -31,6 +34,10 @@ class MovieRepository(
         movieLocalDataSource.insertMovie(movie)
     }
 
+    suspend fun getMovieByID(id: Int): Movie {
+        return movieLocalDataSource.getMovieByID(id)
+    }
+
     suspend fun getMovie(): List<Movie> {
         return movieRemoteDataSource.getMovie()
     }
@@ -43,8 +50,12 @@ class MovieRepository(
         return movieRemoteDataSource.searchMovie(query, adult, language)
     }
 
-    suspend fun MovieDetail(id: Int): MovieDetail {
-        return movieRemoteDataSource.MovieDetail(id)
+    suspend fun MovieDetail(id: Int): Movie {
+        return try {
+            movieRemoteDataSource.MovieDetail(id)
+        } catch (e: SocketTimeoutException) {
+            getMovieByID(id)
+        }
     }
 
     suspend fun videoOfMovie(id: Int): VideoMovie {
