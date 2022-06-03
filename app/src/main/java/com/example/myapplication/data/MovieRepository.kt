@@ -34,6 +34,10 @@ class MovieRepository(
         movieLocalDataSource.insertMovie(movie)
     }
 
+    suspend fun searchLocalMovie(query: String): List<Movie> {
+        return movieLocalDataSource.searchLocalMovie(query)
+    }
+
     suspend fun getMovieByID(id: Int): Movie {
         return movieLocalDataSource.getMovieByID(id)
     }

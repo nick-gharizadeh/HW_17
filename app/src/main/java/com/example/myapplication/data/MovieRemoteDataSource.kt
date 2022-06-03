@@ -13,7 +13,7 @@ class MovieRemoteDataSource(val movieApiService : ApiService) {
         return movieApiService.getUpComingMovies().results
     }
     suspend fun searchMovie(query:String,adult:Boolean,language: String):List<Movie>{
-        return movieApiService.searchMovie(query=query, include_adult = adult, language = language).results
+        return movieApiService.searchMovie(query=query, include_adult = adult, language = language)
     }
     suspend fun MovieDetail(id:Int):Movie{
         return movieApiService.MovieDetail(movieId = id)

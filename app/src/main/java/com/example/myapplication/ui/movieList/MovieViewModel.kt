@@ -90,33 +90,27 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
 
     fun getSearchMovies(query: String, adult: Boolean, language: String) {
         viewModelScope.launch {
-            try {
-                val list = movieRepository.searchMovie(query, adult, language)
-                searchMovieList.value = list
-                connectionStatus.value = ConnectionStatus.Connected
-
-            } catch (e: SocketTimeoutException) {
-                connectionStatus.value = ConnectionStatus.NotConnected
-            }
+          if (connectionStatus.value == ConnectionStatus.Connected) {
+              val list = movieRepository.searchMovie(query, adult, language)
+              searchMovieList.value = list
+              connectionStatus.value = ConnectionStatus.Connected
+          }
+            else
+          {
+              searchMovieList.value=movieRepository.searchLocalMovie("%$query%")
+          }
         }
     }
 
     fun getMovieDetail(id: Int) {
         viewModelScope.launch {
-            try {
                 if (connectionStatus.value == ConnectionStatus.Connected) {
                     movieDetail.value = movieRepository.MovieDetail(id)
                 } else {
                     movieDetail.value = getMovieByID(id)!!
 
                 }
-            }
-            catch (e:Exception)
-            {
-                connectionStatus.value = ConnectionStatus.NotConnected
-            }
         }
-
 }
 
 

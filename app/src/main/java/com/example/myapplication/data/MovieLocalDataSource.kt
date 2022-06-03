@@ -21,6 +21,11 @@ class MovieLocalDataSource(val movieDao:MovieDao?) {
         movieDao?.insert(movie)
     }
 
+   suspend fun searchLocalMovie(query: String): List<Movie>
+    {
+       return movieDao?.searchMovie(query)!!
+    }
+
     suspend fun getMovieByID(id:Int): Movie
     {
        return movieDao?.getMovieByID(id)!!

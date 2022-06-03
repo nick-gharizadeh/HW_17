@@ -12,13 +12,16 @@ import com.example.myapplication.model.Movie
 interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun insert(movie: Movie?)
+    suspend fun insert(movie: Movie?)
 
     @Query("SELECT * from movie where isUpComing=0 ")
     fun getAllMovie(): LiveData<List<Movie?>?>?
 
+    @Query("SELECT * from movie where title Like (:query) ")
+    suspend fun searchMovie(query: String): List<Movie>
+
     @Query("SELECT * from movie where id=(:id) LIMIT 1 ")
-    suspend fun getMovieByID(id:Int): Movie
+    suspend fun getMovieByID(id: Int): Movie
 
     @Query("SELECT * from movie where isUpComing=1 ")
     fun getAllUpComingMovies(): LiveData<List<Movie?>?>?

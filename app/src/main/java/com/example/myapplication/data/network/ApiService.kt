@@ -34,7 +34,7 @@ interface ApiService {
         @Query("query") query: String,
         @Query("include_adult") include_adult: Boolean,
         @Query("language") language: String
-    ):SearchMovie
+    ):List<Movie>
 
     @GET("movie/{movie_id}")
     suspend fun MovieDetail(
