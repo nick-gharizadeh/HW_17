@@ -51,11 +51,7 @@ class MovieRepository(
     }
 
     suspend fun MovieDetail(id: Int): Movie {
-        return try {
-            movieRemoteDataSource.MovieDetail(id)
-        } catch (e: SocketTimeoutException) {
-            getMovieByID(id)
-        }
+        return movieRemoteDataSource.MovieDetail(id)
     }
 
     suspend fun videoOfMovie(id: Int): VideoMovie {

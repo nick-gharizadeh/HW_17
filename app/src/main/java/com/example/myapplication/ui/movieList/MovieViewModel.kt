@@ -28,9 +28,6 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     val allUpComingMovies: LiveData<List<Movie?>?>?
     var countMovies: Int
 
-    suspend fun insertMovie(movie: Movie) {
-        movieRepository.insertMovie(movie)
-    }
 
     init {
         allMovies = movieRepository.getLocalMovies()
@@ -38,6 +35,14 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
         countMovies = movieRepository.countMovies
         getMovie()
         getUpComingMovies()
+    }
+
+    suspend fun insertMovie(movie: Movie) {
+        movieRepository.insertMovie(movie)
+    }
+
+    suspend fun getMovieByID(id: Int): Movie {
+        return movieRepository.getMovieByID(id)
     }
 
     fun getMovie() {
@@ -98,22 +103,34 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
 
     fun getMovieDetail(id: Int) {
         viewModelScope.launch {
-            movieDetail.value = movieRepository.MovieDetail(id)
-        }
-    }
-
-
-    fun getVideoOfMovie(id: Int) {
-        viewModelScope.launch {
             try {
-                videoOfMovie.value = movieRepository.videoOfMovie(id)
-                connectionStatus.value = ConnectionStatus.Connected
+                if (connectionStatus.value == ConnectionStatus.Connected) {
+                    movieDetail.value = movieRepository.MovieDetail(id)
+                } else {
+                    movieDetail.value = getMovieByID(id)!!
 
-            } catch (e: SocketTimeoutException) {
+                }
+            }
+            catch (e:Exception)
+            {
                 connectionStatus.value = ConnectionStatus.NotConnected
             }
         }
+
+}
+
+
+fun getVideoOfMovie(id: Int) {
+    viewModelScope.launch {
+        try {
+            videoOfMovie.value = movieRepository.videoOfMovie(id)
+            connectionStatus.value = ConnectionStatus.Connected
+
+        } catch (e: SocketTimeoutException) {
+            connectionStatus.value = ConnectionStatus.NotConnected
+        }
     }
+}
 
 
 }
