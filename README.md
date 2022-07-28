@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 </head>
 <body>
-<h1>Simple Movie app Using TMDB API</h1>
+<h1>Movie app Using TMDB API</h1>
 <h1>Screenshots</h1>
 <table border="0" cellspacing="20">
   <tbody align="center" >
